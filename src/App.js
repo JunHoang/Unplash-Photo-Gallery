@@ -1,5 +1,6 @@
 import React from 'react';
 import './assets/css/style.css';
+import Images from './components/images';
 
 // function App({title}) {
 //     return (
@@ -38,9 +39,7 @@ class App extends React.Component {
                             onClick={this.handleClick}>Toggle Image</button>
                     </div>
                     {
-                        this.state.isshowing ? 
-                        (<img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1911&q=80" />
-                        ) : null
+                        this.state.isshowing ? <Images/> : null
                     }
                 </div>
             </section>
