@@ -12,8 +12,15 @@ import './assets/css/style.css';
 
 class App extends React.Component {
     constructor(props) {
+        console.log("App constructor");
+
         super(props);
         this.state = {title: "Hello React", isshowing: false};
+    }
+
+    componentDidMount() {
+        console.log("App mounted");
+        this.setState({title: "Hello LifeCycle!"})
     }
 
     handleClick = () => {
@@ -21,6 +28,7 @@ class App extends React.Component {
     }
 
     render() {
+        console.log("App Render");
         return (
             <section className="flex justify-center">
                 <div className="w-1/2">
