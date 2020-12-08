@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./assets/css/style.css";
 import Images from "./components/images";
 
@@ -7,12 +7,18 @@ function App() {
 
   const [isShowing, setIsShowing] = useState(false);
 
+  //Component Did Mount only
+  useEffect(() => {
+      console.log("App Mounted")
+  }, []);
+
   function handleClick () {
     setIsShowing(!isShowing);
   };
 
   return (
     <section className="flex justify-center">
+        {console.log("re-render")}
       <div className="w-1/2">
         <div className="text-center">
           <div className="my-4">{title}</div>
