@@ -7,7 +7,7 @@ export class Images extends Component {
     }
 
     componentDidMount() {
-        console.log("Images Com mounted");
+        console.log("Images Comp mounted");
         this.setState({
             interval: setInterval(() =>{
                 console.log("Hello");
