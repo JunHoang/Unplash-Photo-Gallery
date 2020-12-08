@@ -1,21 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./assets/css/style.css";
 import Images from "./components/images";
 
 function App() {
   const [title, setTitle] = useState("Hello React");
+  const [isShowing, setIsShowing] = useState(false);
+  const [didMount, setdidMount] = useState(false);
 
-  const [isShowing, setIsShowing] = useState(null);
+  const mountRef = useRef(false);
 
   //Component Did Mount only
   useEffect(() => {
+      setdidMount(true);
       console.log("App Mounted")
   }, []);
 
-  //Update Component
+  //Component Will Update
   useEffect(() =>{
-      if (isShowing !== null) {
+      if (mountRef.current) {
           console.log("App Updated");
+      } else {
+          mountRef.current = true;
       }
   }, [isShowing])
 
