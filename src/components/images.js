@@ -1,54 +1,29 @@
-import React, { useEffect } from "react";
+import React from "react";
 
 export default function Images() {
-  useEffect(() => {
-    //Did Mount
-    console.log("Images Comp mounted");
-    const interval = setInterval(() => {
-      console.log("Hello");
-    }, 1000);
+  const Images = [
+    "https://images.unsplash.com/photo-1495562569060-2eec283d3391?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MjZ8fG91dGRvb3J8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1444492417251-9c84a5fa18e0?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=675&q=80",
+    "https://images.unsplash.com/photo-1502394202744-021cfbb17454?ixid=MXwxMjA3fDB8MHxzZWFyY2h8MzF8fG91dGRvb3J8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1501960645408-12c9bcfca49f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fG91dGRvb3J8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+    "https://images.unsplash.com/photo-1534384671-0a91d6232ae3?ixid=MXwxMjA3fDB8MHxzZWFyY2h8Mzh8fG91dGRvb3J8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
+  ];
 
-    //Did Unmount
-    return () => {
-      console.log("Images Comp unmounted");
-      clearInterval(interval);
-    };
-  }, []);
+  function ShowImage() {
+    return Images.map((image) => {
+      return (
+        <div>
+          <img src={image} width="150" />
+        </div>
+      );
+    });
+  }
 
   return (
-    <div>
-      <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1911&q=80" />
-    </div>
+    <section>
+      <div className="flex justify-center">
+        <ShowImage />
+      </div>
+    </section>
   );
 }
-
-// export class Images extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = { interval: null };
-//   }
-
-//   componentDidMount() {
-//     console.log("Images Comp mounted");
-//     this.setState({
-//       interval: setInterval(() => {
-//         console.log("Hello");
-//       }, 1000),
-//     });
-//   }
-
-//   componentWillUnmount() {
-//     console.log("Images Comp unmounted");
-//     clearInterval(this.state.interval);
-//   }
-
-//   render() {
-//     return (
-//       <div>
-//         <img src="https://images.unsplash.com/photo-1592419044706-39796d40f98c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1911&q=80" />
-//       </div>
-//     );
-//   }
-// }
-
-//  export default Images;
