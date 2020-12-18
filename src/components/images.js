@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import Image from "./image";
 
 export default function Images() {
@@ -10,7 +10,28 @@ export default function Images() {
     "https://images.unsplash.com/photo-1501960645408-12c9bcfca49f?ixid=MXwxMjA3fDB8MHxzZWFyY2h8NTB8fG91dGRvb3J8ZW58MHx8MHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60",
   ]);
 
+  const inputRef = useRef(null);
+  const varRef = useRef(images.length);
   const [newImageURL, setnewImageURL] = useState("");
+  const [myName, setmyName] = useState("Dung")
+
+  useEffect(() => {
+    inputRef.current.focus();
+    console.log(varRef);
+  }, [])
+
+  useEffect(() => {
+    varRef.current = varRef.current + 1;
+  })
+
+  useEffect(() => {
+    console.log("this is useEffect");
+  })
+
+  useLayoutEffect(() => {
+    setmyName("ReactJS")
+    console.log("this is useLayoutEffect")
+  })
 
   function handleAdd() {
     if (newImageURL !== "") {
@@ -40,6 +61,8 @@ export default function Images() {
 
   return (
     <section>
+      <p>My name is {myName}</p>
+      <p>Component is updated {varRef.current} times</p>
       <div className="flex flex-wrap justify-center">
         <ShowImage />
       </div>
@@ -47,6 +70,8 @@ export default function Images() {
         <div className="w-full">
           <input
             type="text"
+            id="inputBox"
+            ref={inputRef}
             className="p-1 my-5 border border-gray-800 shadow rounded w-full"
             onChange={handleChange}
             value={newImageURL}
