@@ -11,7 +11,7 @@ export default function Images() {
   useEffect(() => {
     inputRef.current.focus();
     Axios.get(
-      "https://api.unsplash.com/photos/?client_id=wamrH9s9tvasRKNiL56EIJ_0K6Dmo2nVVm_GyIQGiyQ"
+        `${process.env.REACT_APP_UNPLASH_URL}/?client_id=${process.env.REACT_APP_UNPLASH_KEY}`
     ).then((res) => {
       setimages(res.data);
     });
