@@ -1,9 +1,12 @@
 import Axios from "axios";
-import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import useScroll from "../utils/hooks/useScroll";
 import Image from "./image";
+
 
 export default function Images() {
   const [images, setimages] = useState([]);
+  const scrollPosition = useScroll();
 
   const inputRef = useRef(null);
   const [newImageURL, setnewImageURL] = useState("");
@@ -51,6 +54,7 @@ export default function Images() {
 
   return (
     <section>
+      {scrollPosition}
       <div className="flex flex-wrap justify-center">
         <ShowImage />
       </div>
