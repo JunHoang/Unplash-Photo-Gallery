@@ -5,7 +5,8 @@ import Image from "./image";
 
 export default function Images() {
 
-  const [images, setImages] = useFetchImage();
+  const [page, setPage] = useState(1)
+  const [images, setImages] = useFetchImage(page);
 
   const inputRef = useRef(null);
   const [newImageURL, setnewImageURL] = useState("");
@@ -51,6 +52,7 @@ export default function Images() {
       <div className="gap-0" style={{columnCount: 5}}>
         <ShowImage />
       </div>
+      <button onClick={()=>setPage(page + 1)} >Load More</button>
       <div className="flex justify-between">
         <div className="w-full">
           <input
