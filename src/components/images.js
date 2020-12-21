@@ -1,29 +1,23 @@
-import Axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
-import useScroll from "../utils/hooks/useScroll";
+import useFetchImage from "../utils/hooks/useFetchImage";
 import Image from "./image";
 
 
 export default function Images() {
-  const [images, setimages] = useState([]);
-  const scrollPosition = useScroll();
+
+  const [images, setImages] = useFetchImage();
 
   const inputRef = useRef(null);
   const [newImageURL, setnewImageURL] = useState("");
 
   useEffect(() => {
     inputRef.current.focus();
-    Axios.get(
-        `${process.env.REACT_APP_UNPLASH_URL}/?client_id=${process.env.REACT_APP_UNPLASH_KEY}`
-    ).then((res) => {
-      setimages(res.data);
-    });
   }, []);
 
 
   function handleAdd() {
     if (newImageURL !== "") {
-      setimages([...images, newImageURL]);
+      setImages([...images, newImageURL]);
       setnewImageURL("");
     }
   }
@@ -35,7 +29,7 @@ export default function Images() {
   function handleRemove(index) {
     // setimages(images.filter((image,i) => i !== index));
 
-    setimages([
+    setImages([
       ...images.slice(0, index),
       ...images.slice(index + 1, images.slength),
     ]);
@@ -54,7 +48,6 @@ export default function Images() {
 
   return (
     <section>
-      {scrollPosition}
       <div className="flex flex-wrap justify-center">
         <ShowImage />
       </div>
