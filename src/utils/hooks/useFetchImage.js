@@ -7,12 +7,15 @@ export default function useFetchImage(page) {
   const key = process.env.REACT_APP_UNPLASH_KEY;
 
   const [images, setImages] = useState([]);
+  const [errors, setErrors] = useState([]);
 
   useEffect(() => {
-    Axios.get(`${url}/?client_id=${key}&page=${page}`).then((res) => {
+    Axios.get(`${url}/?client=${key}&page=${page}`).then((res) => {
       setImages([...images, ...res.data]);
-    });
+    }).catch((e) => {
+        setErrors(e.response.data.errors);
+    })
   }, [page]);
 
-  return [images, setImages];
+  return [images, setImages, errors];
 }
