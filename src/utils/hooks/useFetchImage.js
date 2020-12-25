@@ -1,4 +1,3 @@
-import { data } from "autoprefixer";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 
