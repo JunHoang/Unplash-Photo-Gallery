@@ -1,5 +1,5 @@
 import Axios from "axios";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function useFetchImage(page, searchTerm) {
   const api = process.env.REACT_APP_UNPLASH_API;
@@ -11,22 +11,32 @@ export default function useFetchImage(page, searchTerm) {
 
   useEffect(() => {
     setIsLoading(true);
-
-    const url = searchTerm === null ? 'photos' : 'search/photos'
-
-    Axios.get(`${api}/${url}?client_id=${key}&page=${page}&query=${searchTerm}`)
-    .then((res) => {
-      if(searchTerm) {
-        setImages([ ...res.data.results]);
-      } else {
+    Axios.get(`${api}/photos?client_id=${key}&page=${page}`)
+      .then((res) => {
         setImages([...images, ...res.data]);
-      }
-      setIsLoading(false);
-    }).catch((e) => {
+        setIsLoading(false);
+      })
+      .catch((e) => {
         setErrors(e.response.data.errors);
         setIsLoading(false);
-    })
-  }, [page, searchTerm]);
+      });
+  }, [page]);
+
+  useEffect(() => {
+    if (searchTerm === null) return;
+
+    Axios.get(
+      `${api}/search/photos?client_id=${key}&page=${page}&query=${searchTerm}`
+    )
+      .then((res) => {
+          setImages([...res.data.results]);
+        setIsLoading(false);
+      })
+      .catch((e) => {
+        setErrors(e.response.data.errors);
+        setIsLoading(false);
+      });
+  }, [searchTerm]);
 
   return [images, setImages, errors, isLoading];
 }
