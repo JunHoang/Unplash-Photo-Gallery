@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import firebase from "../config/firebase";
 import AppContext from "../store/AppContext";
 
 export default function Header() {
-  const history = useHistory();
   const [isLoggedIn, user] = useContext(AppContext);
+  const history = useHistory();
 
   function logout() {
     firebase
