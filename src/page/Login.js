@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import firebase from "../config/firebase";
 
 export default function Login() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [form, setForm] = useState({email: "", password: ""});
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const history = useHistory();
 
   function handleForm(e) {
     if(isLoading) return;
@@ -17,7 +19,9 @@ export default function Login() {
       .auth()
       .signInWithEmailAndPassword(form.email, form.password)
       .then(res => {
-        setIsLoggedIn(true);
+        // setIsLoggedIn(true);
+        // history.push("/"); //Add the homepage after loggin, and we can comeback to the loggin page
+        history.replace("/"); //Replace login page to homepage, and cannot turn back the website
         setError("");
         setIsLoading(false);
       })
@@ -31,7 +35,7 @@ export default function Login() {
     setForm({...form, [e.target.name]: e.target.value});
   }
 
-  if(isLoggedIn) return <Redirect to="/" />
+  // if(isLoggedIn) return <Redirect to="/" />
 
   return (
     <div className="flex h-screen bg-gray-200">
