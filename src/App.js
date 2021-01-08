@@ -13,6 +13,7 @@ import AppContext from "./store/AppContext";
 import AuthRoute from "./utils/routes/AuthRoute";
 import GuestRoute from "./utils/routes/GuestRoute";
 import Loading from "./components/Loading";
+import NotFound from "./page/404";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -34,7 +35,7 @@ function App() {
     });
   }, []);
 
-  if(isLoading) return <Loading/>
+  if (isLoading) return <Loading />;
 
   return (
     <Router>
@@ -43,14 +44,14 @@ function App() {
         <Switch>
           {routes.map((route, index) => {
             if (route.protected === "guest") {
-              return(
+              return (
                 <GuestRoute
                   key={index}
                   path={route.path}
                   exact={route.exact}
                   component={route.component}
                 />
-              )
+              );
             }
 
             if (route.protected === "auth") {
@@ -73,6 +74,11 @@ function App() {
               />
             );
           })}
+          <Route
+            path="*"
+          >
+            <NotFound/>
+          </Route>
         </Switch>
       </AppContext.Provider>
     </Router>

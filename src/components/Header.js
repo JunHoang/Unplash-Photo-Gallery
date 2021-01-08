@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link, useHistory } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import firebase from "../config/firebase";
 import AppContext from "../store/AppContext";
 
@@ -20,23 +20,38 @@ export default function Header() {
   }
 
   return (
-    <nav className="py-5 bg-gray-900 text-white text-xl">
+    <nav className="py-5 bg-gray-900 text-white text-xl flex justify-between">
       <ul className="flex justify-between px-10">
         <span className="flex">
           <li className="mr-5">
-            <Link to="/">Home</Link>
+            <NavLink exact activeClassName="text-blue-200 font-bold" to="/">
+              Home
+            </NavLink>
           </li>
           <li className="mr-5">
-            <Link to="/gallery">Gallery</Link>
+            <NavLink activeClassName="text-blue-200 font-bold" to="/gallery">
+              Gallery
+            </NavLink>
           </li>
         </span>
-        <li>
+      </ul>
+      <ul className="flex justify-between px-10">
+        <li className="ml-5">
           {isLoggedIn ? (
             <button onClick={logout}>Logout</button>
           ) : (
-            <Link to="/login">Login</Link>
+            <NavLink activeClassName="text-blue-200 font-bold" to="/login">
+              Login
+            </NavLink>
           )}
         </li>
+        {!isLoggedIn && (
+          <li className="ml-5">
+            <NavLink activeClassName="text-blue-200 font-bold" to="/signup">
+              Signup
+            </NavLink>
+          </li>
+        )}
       </ul>
     </nav>
   );
