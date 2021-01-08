@@ -1,3 +1,4 @@
+import { AnimateSharedLayout } from "framer-motion";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useDebounce from "../utils/hooks/useDebounce";
@@ -8,7 +9,10 @@ import Loading from "./Loading";
 export default function Images() {
   const [page, setPage] = useState(1);
   const [searchTerm, setSearchTerm] = useState(null);
-  const [images, setImages, errors, isLoading] = useFetchImage(page, searchTerm);
+  const [images, setImages, errors, isLoading] = useFetchImage(
+    page,
+    searchTerm
+  );
 
   function handleRemove(index) {
     setImages([
@@ -19,21 +23,23 @@ export default function Images() {
 
   function ShowImage() {
     return (
-      <InfiniteScroll
-        dataLength={images.length}
-        next={() => setPage(page + 1)}
-        hasMore={true}
-        className="flex flex-wrap"
-      >
-        {images.map((img, index) => (
-          <Image
-            image={img.urls.regular}
-            handleRemove={handleRemove}
-            index={index}
-            key={index}
-          />
-        ))}
-      </InfiniteScroll>
+      <AnimateSharedLayout>
+        <InfiniteScroll
+          dataLength={images.length}
+          next={() => setPage(page + 1)}
+          hasMore={true}
+          className="flex flex-wrap"
+        >
+          {images.map((img, index) => (
+            <Image
+              image={img.urls.regular}
+              handleRemove={handleRemove}
+              index={index}
+              key={index}
+            />
+          ))}
+        </InfiniteScroll>
+      </AnimateSharedLayout>
     );
   }
 
