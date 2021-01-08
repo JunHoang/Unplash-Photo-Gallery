@@ -7,10 +7,11 @@ import {
 } from "react-router-dom";
 import "./assets/css/style.css";
 import Header from "./components/Header";
-import routes from "./utils/routes";
+import routes from "./utils/routes/index";
 import firebase from "./config/firebase";
 import AppContext from "./store/AppContext";
 import AuthRoute from "./utils/routes/AuthRoute";
+import GuestRoute from "./utils/routes/GuestRoute";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,7 +22,6 @@ function App() {
       if (user) {
         setIsLoggedIn(true);
         setUser(user);
-        console.log(user);
       } else {
         setUser({});
         setIsLoggedIn(false);
@@ -35,11 +35,18 @@ function App() {
         <Header />
         <Switch>
           {routes.map((route, index) => {
-            if (route.path === "/login") {
-              if (isLoggedIn) return <Redirect to="/" />;
+            if (route.protected === "guest") {
+              return(
+                <GuestRoute
+                  key={index}
+                  path={route.path}
+                  exact={route.exact}
+                  component={route.component}
+                />
+              )
             }
 
-            if (route.path === "/gallery") {
+            if (route.protected === "auth") {
               return (
                 <AuthRoute
                   key={index}
