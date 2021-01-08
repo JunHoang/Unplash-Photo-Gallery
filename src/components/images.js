@@ -1,4 +1,4 @@
-import { AnimateSharedLayout } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 import React, { useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import useDebounce from "../utils/hooks/useDebounce";
@@ -22,6 +22,7 @@ export default function Images() {
   }
 
   function ShowImage() {
+    const [showPreview, setShowPreview] = useState(false);
     return (
       <AnimateSharedLayout>
         <InfiniteScroll
@@ -31,14 +32,37 @@ export default function Images() {
           className="flex flex-wrap"
         >
           {images.map((img, index) => (
-            <Image
-              image={img.urls.regular}
-              handleRemove={handleRemove}
-              index={index}
+            <motion.div
+              className=" flex w-1/5 p-1 border justify-center"
               key={index}
-            />
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              layoutId={img.urls.regular}
+            >
+              <Image
+                show={() => setShowPreview(img.urls.regular)}
+                image={img.urls.regular}
+                handleRemove={handleRemove}
+                index={index}
+              />
+            </motion.div>
           ))}
         </InfiniteScroll>
+
+        <AnimatePresence>
+          {showPreview && (
+            <motion.section
+              layoutId={showPreview}
+              exit={{ opacity: 0, rotate: 360, transition: { duration: 1 } }}
+              className="fixed w-full h-full flex justify-center items-center top-0 left-0 z-40"
+              onClick={() => setShowPreview(false)}
+            >
+              <div className="bg-white">
+                <img src={showPreview} width="600" height="auto" />
+              </div>
+            </motion.section>
+          )}
+        </AnimatePresence>
       </AnimateSharedLayout>
     );
   }
