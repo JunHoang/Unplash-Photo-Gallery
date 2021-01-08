@@ -48,7 +48,7 @@ export default function Header() {
         {!isLoggedIn && (
           <li className="ml-5">
             <NavLink activeClassName="text-blue-200 font-bold" to="/signup">
-              Signup
+              SignUp
             </NavLink>
           </li>
         )}
