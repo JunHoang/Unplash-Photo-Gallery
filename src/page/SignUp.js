@@ -1,5 +1,6 @@
 import { useFormik } from "formik";
 import React from "react";
+import * as Yup from "yup";
 
 export default function SignUp() {
   const formik = useFormik({
@@ -7,25 +8,10 @@ export default function SignUp() {
     onSubmit: (value) => {
       console.log("Formik", value);
     },
-    validate: (values) => {
-      const errors = {};
-
-      if (!values.email) {
-        errors.email = "Email Field is required.";
-      } else if (
-        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
-      ) {
-        errors.email = "Email is invalid.";
-      }
-
-      if (!values.password) {
-        errors.password = "Password Field is required.";
-      } else if (values.password.length < 6) {
-        errors.password = "Password must be longer than 6 characters.";
-      }
-
-      return errors;
-    },
+    validationSchema: Yup.object({
+        email: Yup.string().required('Email is required.').email('Email is invalid.'),
+        password: Yup.string().required('Password is required.').min(6,'Password must be longer than 6 characters.') 
+    })
   });
 
   return (
