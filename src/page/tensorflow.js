@@ -4,7 +4,7 @@ import "@tensorflow/tfjs";
 
 export default function Tensorflow() {
   const imageRef = useRef();
-  const [predict, predictions, isLoading ] = useTFClassify();
+  const [predict, predictions, isPredictions, isLoading ] = useTFClassify();
 
   return (
     <div className="flex justify-center">
@@ -28,8 +28,7 @@ export default function Tensorflow() {
             className="p-2 rounded bg-gray-900 text-white w-64 mt-2"
             onClick={()=>predict(imageRef.current)}
           >
-            {isLoading && "⏳"}
-            {!isLoading && "Predict Result"}
+            {isLoading ? "⏳" : "Predict Result"}
           </button>
         </div>
       </div>
