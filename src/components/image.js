@@ -1,7 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
 import React, { useState } from "react";
+import PropTypes from "prop-types";
 
-export default function Image({ index, image, handleRemove,show }) {
+function Image({ index, image, handleRemove,show }) {
   const [IsHovering, setIsHovering] = useState(false);
 
   return (
@@ -24,4 +24,13 @@ export default function Image({ index, image, handleRemove,show }) {
         />
     </div>
   );
+};
+
+Image.propTypes = {
+  show: PropTypes.func,
+  index: PropTypes.number,
+  handleRemove: PropTypes.func,
+  image: PropTypes.string
 }
+
+export default Image;
