@@ -8,7 +8,7 @@ export default function useTFClassify() {
   
     function predict(img) {
     //   const img = imageRef.current;
-    
+
       setIsLoading(true);
       // Load the model.
       mobilenet.load().then((model) => {
@@ -20,5 +20,5 @@ export default function useTFClassify() {
       });
     }
 
-    return [predict, predictions, isLoading]
+    return [predict, predictions, setPredictions, isLoading]
 }
