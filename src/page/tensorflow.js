@@ -8,15 +8,15 @@ export default function Tensorflow() {
 
   return (
     <div className="flex justify-center">
-      <div className="justify-center m-5">
-        <h1 className="text-center">TensorFlow example</h1>
+      <div className="justify-center">
+        <h1 className="text-center m-2 text-2xl">TensorFlow Example</h1>
         <img
           src="https://images.unsplash.com/photo-1534361960057-19889db9621e?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MXwxOTE4Nzl8MHwxfHNlYXJjaHwxMXx8ZG9nfGVufDB8fHw&ixlib=rb-1.2.1&q=80&w=1080"
-          width="400"
+          width="600"
           ref={imageRef}
           crossOrigin="anonymous"
         />
-        <div className="text-center m-5">
+        <div className="text-center m-2">
           {predictions.length > 0 &&
             predictions.map((prediction) => (
               <div className="flex justify-between">
